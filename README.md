@@ -2,11 +2,7 @@
 
 ## Overview
 
-The Sunrise Dental Clinic Management System is a web-based Java application developed to automate the daily operations of Sunrise Dental Clinic. The system replaces manual paper-based processes with a computerized solution for managing patients, appointments, treatments, billing, reports, and user authentication.
-
-This project was developed as part of the Advanced Programming coursework and follows Object-Oriented Programming principles, a three-tier architecture, design patterns, database integration, and web technologies.
-
----
+The Sunrise Dental Clinic Management System is a web-based Java application developed to automate patient registration, appointment scheduling, treatment management, billing, and reporting functions for Sunrise Dental Clinic. The system replaces manual paper-based processes with a secure, efficient, and centralized digital solution.
 
 ## Features
 
@@ -14,39 +10,35 @@ This project was developed as part of the Advanced Programming coursework and fo
 
 * Secure login system
 * Role-based access control
-* Authorized staff access only
+* Administrator and Receptionist access levels
 
 ### Patient Management
 
-* Add new patients
-* Update patient details
-* Search patients
-* Delete patient records
+* Add, update, search, and delete patients
+* Store patient contact and medical information
 
 ### Dentist Management
 
-* Register dentists
-* Manage specializations
+* Manage dentist records
+* Store specialization details
 * Update dentist information
 
 ### Treatment Management
 
-* Add treatments
-* Update treatment prices
-* Manage treatment records
+* Add and update treatments
+* Maintain treatment pricing information
 
 ### Appointment Management
 
-* Create appointments
-* View appointment details
+* Schedule appointments
 * Search appointments
 * Prevent duplicate bookings
 
 ### Billing System
 
-* Calculate treatment costs
 * Generate patient bills
-* Store billing records
+* Calculate treatment costs
+* Print receipts
 
 ### Reports
 
@@ -56,41 +48,37 @@ This project was developed as part of the Advanced Programming coursework and fo
 
 ### Help Section
 
-* User instructions
-* System guidance for new staff
+* System usage guidelines
+* User assistance for clinic staff
 
 ---
 
 ## Technologies Used
 
-### Frontend
-
-* JSP
-* HTML5
-* CSS3
-* JavaScript
-
-### Backend
-
 * Java
+* JSP
 * Jakarta Servlet
-
-### Database
-
 * MySQL
-
-### Build Tool
-
 * Maven
-
-### Web Server
-
 * Apache Tomcat 10
+* Visual Studio Code
+* Git & GitHub
 
-### Version Control
+---
 
-* Git
-* GitHub
+## Design Patterns
+
+### MVC Pattern
+
+Separates the application into Model, View, and Controller components.
+
+### DAO Pattern
+
+Handles database operations independently from business logic.
+
+### Singleton Pattern
+
+Used for database connection management.
 
 ---
 
@@ -98,44 +86,9 @@ This project was developed as part of the Advanced Programming coursework and fo
 
 The application follows a Three-Tier Architecture:
 
-1. Presentation Layer (JSP Pages)
-2. Business Logic Layer (Servlets and Services)
-3. Data Access Layer (DAO Classes and MySQL Database)
-
----
-
-## Design Patterns Implemented
-
-### DAO Pattern
-
-Used to separate database operations from business logic.
-
-### Singleton Pattern
-
-Used for database connection management.
-
-### MVC Pattern
-
-Used to separate presentation, control, and data components.
-
----
-
-## Database
-
-Database Name:
-
-```sql
-sunrise_dental_db
-```
-
-Main Tables:
-
-* users
-* patients
-* dentists
-* treatments
-* appointments
-* bills
+1. Presentation Layer (JSP)
+2. Business Logic Layer (Servlets & Services)
+3. Data Access Layer (DAO & MySQL)
 
 ---
 
@@ -143,38 +96,65 @@ Main Tables:
 
 ### Prerequisites
 
-* JDK 17 or later
-* Apache Tomcat 10
+* JDK 17+
+* Apache Tomcat 10+
 * MySQL Server
 * Maven
+* Visual Studio Code
 
-### Steps
-
-1. Clone the repository.
+### Clone Repository
 
 ```bash
-git clone  https://github.com/azlafaasmi/CIS6003_AdvancedProgramming.git
+git clone https://github.com/azlafaasmi/CIS6003_AdvancedProgramming.git
 ```
 
-2. Open the project in IntelliJ IDEA or Eclipse.
+### Open Project
 
-3. Configure MySQL database.
-
-4. Update database credentials in:
-
-```text
-DBConnection.java
+```bash
+cd CIS6003_AdvancedProgramming
 ```
 
-5. Build the project.
+Open the folder using Visual Studio Code.
+
+### Build Project
 
 ```bash
 mvn clean package
 ```
 
-6. Deploy the generated WAR file to Apache Tomcat.
+### Database Setup
 
-7. Start Tomcat and open:
+Create the database:
+
+```sql
+CREATE DATABASE sunrise_dental_db;
+```
+
+Import the SQL file provided in the project.
+
+### Configure Database
+
+Update database credentials in:
+
+```text
+src/main/java/util/DBConnection.java
+```
+
+### Deploy Application
+
+Copy the generated WAR file from:
+
+```text
+target/
+```
+
+into Apache Tomcat's:
+
+```text
+webapps/
+```
+
+Start Tomcat and access:
 
 ```text
 http://localhost:8080/SunriseDentalClinic
@@ -182,53 +162,199 @@ http://localhost:8080/SunriseDentalClinic
 
 ---
 
-## Testing
+## Project Structure
 
-The project includes:
-
-* Unit Testing
-* Integration Testing
-* User Interface Testing
-* Validation Testing
-
-JUnit was used to automate test execution.
+```text
+SunriseDentalClinic/
+│
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │
+│   │   ├── controller/
+│   │   │   ├── LoginServlet.java
+│   │   │   ├── LogoutServlet.java
+│   │   │   ├── UserServlet.java
+│   │   │   ├── PatientServlet.java
+│   │   │   ├── DentistServlet.java
+│   │   │   ├── TreatmentServlet.java
+│   │   │   ├── AppointmentServlet.java
+│   │   │   ├── BillingServlet.java
+│   │   │   └── ReportServlet.java
+│   │   │
+│   │   ├── service/
+│   │   │   ├── LoginService.java
+│   │   │   ├── UserService.java
+│   │   │   ├── PatientService.java
+│   │   │   ├── DentistService.java
+│   │   │   ├── TreatmentService.java
+│   │   │   ├── AppointmentService.java
+│   │   │   ├── BillingService.java
+│   │   │   └── ReportService.java
+│   │   │
+│   │   ├── dao/
+│   │   │   ├── UserDAO.java
+│   │   │   ├── PatientDAO.java
+│   │   │   ├── DentistDAO.java
+│   │   │   ├── TreatmentDAO.java
+│   │   │   ├── AppointmentDAO.java
+│   │   │   └── BillDAO.java
+│   │   │
+│   │   ├── model/
+│   │   │   ├── User.java
+│   │   │   ├── Patient.java
+│   │   │   ├── Dentist.java
+│   │   │   ├── Treatment.java
+│   │   │   ├── Appointment.java
+│   │   │   └── Bill.java
+│   │   │
+│   │   ├── filter/
+│   │   │   ├── AuthenticationFilter.java
+│   │   │   └── AdminAuthorizationFilter.java
+│   │   │
+│   │   ├── util/
+│   │   │   ├── DBConnection.java
+│   │   │   ├── PasswordUtil.java
+│   │   │   ├── PDFGenerator.java
+│   │   │   ├── AppointmentNumberGenerator.java
+│   │   │   └── ValidationUtil.java
+│   │   │
+│   │   └── webservice/
+│   │       ├── AppointmentAPI.java
+│   │       └── BillingAPI.java
+│   │
+│   │
+│   ├── resources/
+│   │   └── application.properties
+│   │
+│   │
+│   └── webapp/
+│       │
+│       ├── assets/
+│       │   ├── css/
+│       │   │   └── style.css
+│       │   │
+│       │   ├── js/
+│       │   │   └── script.js
+│       │   │
+│       │   └── images/
+│       │
+│       ├── views/
+│       │
+│       │   ├── auth/
+│       │   │   └── login.jsp
+│       │   │
+│       │   ├── dashboard/
+│       │   │   └── dashboard.jsp
+│       │   │
+│       │   ├── users/
+│       │   │   ├── add-user.jsp
+│       │   │   ├── edit-user.jsp
+│       │   │   └── users.jsp
+│       │   │
+│       │   ├── patients/
+│       │   │   ├── add-patient.jsp
+│       │   │   ├── edit-patient.jsp
+│       │   │   └── patients.jsp
+│       │   │
+│       │   ├── dentists/
+│       │   │   ├── add-dentist.jsp
+│       │   │   └── dentists.jsp
+│       │   │
+│       │   ├── treatments/
+│       │   │   ├── add-treatment.jsp
+│       │   │   └── treatments.jsp
+│       │   │
+│       │   ├── appointments/
+│       │   │   ├── add-appointment.jsp
+│       │   │   ├── search-appointment.jsp
+│       │   │   ├── edit-appointment.jsp
+│       │   │   └── appointments.jsp
+│       │   │
+│       │   ├── billing/
+│       │   │   ├── generate-bill.jsp
+│       │   │   ├── bill-details.jsp
+│       │   │   └── receipt.jsp
+│       │   │
+│       │   ├── reports/
+│       │   │   ├── appointment-report.jsp
+│       │   │   └── revenue-report.jsp
+│       │   │
+│       │   └── help/
+│       │       └── help.jsp
+│       │
+│       ├── index.jsp
+│       │
+│       └── WEB-INF/
+│           └── web.xml
+│
+│
+├── src/test/java/
+│
+│   ├── service/
+│   │   ├── LoginServiceTest.java
+│   │   ├── PatientServiceTest.java
+│   │   ├── AppointmentServiceTest.java
+│   │   └── BillingServiceTest.java
+│   │
+│   └── dao/
+│       ├── PatientDAOTest.java
+│       └── AppointmentDAOTest.java
+│
+│
+├── database/
+│   ├── schema.sql
+│   ├── sample-data.sql
+│   ├── procedures.sql
+│   └── triggers.sql
+│
+│
+├── docs/
+│   ├── UseCaseDiagram.png
+│   ├── ClassDiagram.png
+│   ├── SequenceDiagram_Login.png
+│   ├── SequenceDiagram_Appointment.png
+│   └── SequenceDiagram_Billing.png
+│
+│
+├── pom.xml
+│
+├── README.md
+│
+└── .gitignore
+```
 
 ---
 
-## GitHub Repository
+## Version Control
 
-The project uses GitHub for:
+GitHub is used for:
 
-* Version control
 * Source code management
-* Development history tracking
+* Version tracking
 * Collaboration
-* CI/CD workflow execution
+* Continuous Integration
+* Project backup and recovery
+
+Repository:
+
+https://github.com/azlafaasmi/CIS6003_AdvancedProgramming
 
 ---
 
 ## Future Enhancements
 
-* Email notifications
-* SMS appointment reminders
-* Online patient portal
-* Cloud deployment
-* Mobile application integration
+* Email Notifications
+* SMS Appointment Reminders
+* Online Patient Portal
+* Cloud Deployment
+* Mobile Application Support
 
 ---
 
 ## Author
 
 Azlafa Asmi
-
-Advanced Programming Coursework
-
+CIS6003 – Advanced Programming
 Sunrise Dental Clinic Management System
-
 2026
-
----
-
-## License
-
-This project is developed for academic purposes only.
